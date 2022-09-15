@@ -4,18 +4,10 @@
     </div>
     <div class="box">
       <div class="left-list">
-        <a-list
-            class="demo-loadmore-list"
-            :loading="loading"
-            item-layout="horizontal"
-            :data-source="listData"
-        >
-          <div
-              v-if="showLoadingMore"
-              slot="loadMore"
-              :style="{ textAlign: 'center', marginTop: '12px', height: '32px', lineHeight: '32px' }"
-          >
-            <a-spin v-if="loadingMore"/>
+        <a-list class="demo-loadmore-list" :loading="loading" item-layout="horizontal" :data-source="listData">
+          <div v-if="showLoadingMore" slot="loadMore"
+            :style="{ textAlign: 'center', marginTop: '12px', height: '32px', lineHeight: '32px' }">
+            <a-spin v-if="loadingMore" />
             <a-button v-else @click="onLoadMore">
               loading more
             </a-button>
@@ -33,119 +25,56 @@
     <div id="panel">
       <p>输入关键字，将展示相关地点提示，点击提示可定位到该处。</p>
       <input id='keyword' type="text" value='' @input="getSuggestions()"><input id="search" type="button" class="btn"
-                                                                                value="搜索"
-                                                                                onclick="searchByKeyword()"/>
+        value="搜索" onclick="searchByKeyword()" />
       <ul id="idSuggestionList">
-        <li v-for="(item, index) in suggestionList" :key="index"><a href="#"
-                                                                    @click="setSuggestion(index)">{{ item.title }}<span
-            class="item_info">{{ item.address }}</span></a></li>
+        <li v-for="(item, index) in suggestionList" :key="index"><a href="#" @click="setSuggestion(index)">{{ item.title
+        }}<span class="item_info">{{ item.address }}</span></a></li>
       </ul>
     </div>
-    <a-drawer
-        title="Basic Drawer"
-        placement="right"
-        :width="720"
-        :closable="false"
-        :visible="visible"
-        :get-container="false"
-        :wrap-style="{ position: 'absolute' }"
-        @close="onClose"
-    >
+    <a-drawer title="Basic Drawer" placement="right" :width="720" :closable="false" :visible="visible"
+      :get-container="false" :wrap-style="{ position: 'absolute' }" @close="onClose">
       <a-form :form="form" class="form">
-        <a-form-item
-            label="经度"
-            :labelCol="{span: 3}"
-            :wrapperCol="{span: 10}"
-        >
-          <a-input v-model="formData.lng" :placeholder="$t('titleInput')"/>
+        <a-form-item label="经度" :labelCol="{span: 3}" :wrapperCol="{span: 10}">
+          <a-input v-model="formData.lng" :placeholder="$t('titleInput')" />
         </a-form-item>
-        <a-form-item
-            label="维度"
-            :labelCol="{span: 3}"
-            :wrapperCol="{span: 10}"
-        >
-          <a-input v-model="formData.lat" :placeholder="$t('titleInput')"/>
+        <a-form-item label="维度" :labelCol="{span: 3}" :wrapperCol="{span: 10}">
+          <a-input v-model="formData.lat" :placeholder="$t('titleInput')" />
         </a-form-item>
-        <a-form-item
-            label="名称"
-            :labelCol="{span: 3}"
-            :wrapperCol="{span: 10}"
-            :required="false"
-        >
-          <a-input v-model="formData.name" :placeholder="$t('customerInput')"/>
+        <a-form-item label="名称" :labelCol="{span: 3}" :wrapperCol="{span: 10}" :required="false">
+          <a-input v-model="formData.name" :placeholder="$t('customerInput')" />
         </a-form-item>
-        <a-form-item
-            label="工程名称"
-            :labelCol="{span: 3}"
-            :wrapperCol="{span: 10}"
-            :required="false"
-        >
-          <a-input v-model="formData.projectName" :placeholder="$t('criticsInput')"/>
+        <a-form-item label="工程名称" :labelCol="{span: 3}" :wrapperCol="{span: 10}" :required="false">
+          <a-input v-model="formData.projectName" :placeholder="$t('criticsInput')" />
         </a-form-item>
-        <a-form-item
-            label="工程内容"
-            :labelCol="{span: 3}"
-            :wrapperCol="{span: 10}"
-            :required="false"
-        >
-          <a-textarea v-model="formData.projectContent" :placeholder="$t('criticsInput')"/>
+        <a-form-item label="工程内容" :labelCol="{span: 3}" :wrapperCol="{span: 10}" :required="false">
+          <a-textarea v-model="formData.projectContent" :placeholder="$t('criticsInput')" />
         </a-form-item>
-        <a-form-item
-            label="责任单位"
-            :labelCol="{span: 3}"
-            :wrapperCol="{span: 10}"
-            :required="false"
-        >
-          <a-input v-model="formData.projectUnit" :placeholder="$t('criticsInput')"/>
+        <a-form-item label="责任单位" :labelCol="{span: 3}" :wrapperCol="{span: 10}" :required="false">
+          <a-input v-model="formData.projectUnit" :placeholder="$t('criticsInput')" />
         </a-form-item>
-        <a-form-item
-            label="施工年限"
-            :labelCol="{span: 3}"
-            :wrapperCol="{span: 10}"
-            :required="false"
-        >
-          <a-input v-model="formData.projectPeriod" :placeholder="$t('criticsInput')"/>
+        <a-form-item label="施工年限" :labelCol="{span: 3}" :wrapperCol="{span: 10}" :required="false">
+          <a-input v-model="formData.projectPeriod" :placeholder="$t('criticsInput')" />
         </a-form-item>
-        <a-form-item
-            label="影响道路"
-            :labelCol="{span: 3}"
-            :wrapperCol="{span: 10}"
-            :required="false"
-        >
-          <a-input v-model="formData.road" :placeholder="$t('criticsInput')"/>
+        <a-form-item label="影响道路" :labelCol="{span: 3}" :wrapperCol="{span: 10}" :required="false">
+          <a-input v-model="formData.road" :placeholder="$t('criticsInput')" />
         </a-form-item>
-        <a-form-item
-            label="积水程度"
-            :labelCol="{span: 3}"
-            :wrapperCol="{span: 10}"
-            :required="false"
-        >
-          <a-input-number :min="0" :max="100"/>
+        <a-form-item label="积水程度" :labelCol="{span: 3}" :wrapperCol="{span: 10}" :required="false">
+          <a-input-number :min="0" :max="100" />
           <span>%</span>
         </a-form-item>
-        <a-form-item
-            label="图片"
-            :labelCol="{span: 3}"
-            :wrapperCol="{span: 30}"
-            :required="false"
-        >
+        <a-form-item label="图片" :labelCol="{span: 3}" :wrapperCol="{span: 30}" :required="false">
           <div class="clearfix">
-            <a-upload
-                action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                list-type="picture-card"
-                :file-list="fileList"
-                @preview="handlePreview"
-                @change="handleChange"
-            >
+            <a-upload action="https://www.mocky.io/v2/5cc8019d300000980a055e76" list-type="picture-card"
+              :file-list="fileList" @preview="handlePreview" @change="handleChange">
               <div v-if="fileList.length < 4">
-                <a-icon type="plus"/>
+                <a-icon type="plus" />
                 <div class="ant-upload-text">
                   Upload
                 </div>
               </div>
             </a-upload>
             <a-modal :visible="previewVisible" :footer="null" @cancel="handleCancel">
-              <img alt="example" style="width: 100%" :src="previewImage"/>
+              <img alt="example" style="width: 100%" :src="previewImage" />
             </a-modal>
           </div>
         </a-form-item>
@@ -158,7 +87,7 @@
   </div>
 </template>
 <script>
-import {request, METHOD} from '@/utils/request'
+import { request, METHOD } from '@/utils/request'
 
 function getBase64(file) {
   return new Promise((resolve, reject) => {
@@ -266,7 +195,7 @@ export default {
         map: this.map,
         position: position,
         content: `<h3>${item.name}</h3><p>地址：${item.address}</p><p>电话：${item.tel}</p>`,
-        offset: {x: 0, y: -50},
+        offset: { x: 0, y: -50 },
       }); // 新增信息窗体显示地标的名称与地址、电话等信息
       infoWindow.open();
       this.map.setCenter(position);
@@ -352,12 +281,12 @@ export default {
       this.previewImage = file.url || file.preview;
       this.previewVisible = true;
     },
-    handleChange({fileList}) {
+    handleChange({ fileList }) {
       this.fileList = fileList;
     },
     initMap() {
       console.log(window); // 通过window获取
-      const {TMap} = window;
+      const { TMap } = window;
       const center = new window.TMap.LatLng(34.261792, 117.184811);
       const code = 320302;
       //初始化地图
@@ -392,7 +321,7 @@ export default {
       // this.deleteSomeInfo();
     },
     searchByKeyword() {
-      var search = new window.TMap.service.Search({pageSize: 10}); // 新建一个地点搜索类
+      var search = new window.TMap.service.Search({ pageSize: 10 }); // 新建一个地点搜索类
       var markers = new window.TMap.MultiMarker({
         map: this.map,
         geometries: [],
@@ -405,36 +334,36 @@ export default {
       markers.setGeometries([]);
       // 在地图显示范围内以给定的关键字搜索地点
       search
-          .searchRectangle({
-            // keyword: document.getElementById('keyword').value,
-            keyword: "地铁",
-            bounds: this.map.getBounds(),
-          })
-          .then((result) => {
-            result.data.forEach((item, index) => {
-              var geometries = markers.getGeometries();
-              var infoWindow = new window.TMap.InfoWindow({
-                map: this.map,
-                position: item.location,
-                content: `<h3>${item.title}</h3><p>地址：${item.address}</p><p>电话：${item.tel}</p>`,
-                offset: {x: 0, y: -50},
-              }); // 新增信息窗体显示地标的名称与地址、电话等信息
-              infoWindow.close();
-              infoWindowList[index] = infoWindow;
-              geometries.push({
-                id: String(index), // 点标注数据数组
-                position: item.location,
-              });
-              markers.updateGeometries(geometries); // 绘制地点标注
-              markers.on('click', (e) => {
-                infoWindowList[Number(e.geometry.id)].open();
-              }); // 点击标注显示信息窗体
+        .searchRectangle({
+          // keyword: document.getElementById('keyword').value,
+          keyword: "地铁",
+          bounds: this.map.getBounds(),
+        })
+        .then((result) => {
+          result.data.forEach((item, index) => {
+            var geometries = markers.getGeometries();
+            var infoWindow = new window.TMap.InfoWindow({
+              map: this.map,
+              position: item.location,
+              content: `<h3>${item.title}</h3><p>地址：${item.address}</p><p>电话：${item.tel}</p>`,
+              offset: { x: 0, y: -50 },
+            }); // 新增信息窗体显示地标的名称与地址、电话等信息
+            infoWindow.close();
+            infoWindowList[index] = infoWindow;
+            geometries.push({
+              id: String(index), // 点标注数据数组
+              position: item.location,
             });
+            markers.updateGeometries(geometries); // 绘制地点标注
+            markers.on('click', (e) => {
+              infoWindowList[Number(e.geometry.id)].open();
+            }); // 点击标注显示信息窗体
           });
+        });
     },
     getSuggestions() {
-      const {TMap} = window;
-      let {map} = this;
+      const { TMap } = window;
+      let { map } = this;
       // 新建一个地点搜索类
       const suggest = new TMap.service.Suggestion({
         // 新建一个关键字输入提示类
@@ -446,20 +375,20 @@ export default {
       var keyword = document.getElementById('keyword').value;
       if (keyword) {
         suggest
-            .getSuggestions({keyword: keyword, location: map.getCenter()})
-            .then((result) => {
-              // 以当前所输入关键字获取输入提示
-              this.suggestionList = result.data;
-            })
-            .catch((error) => {
-              console.log(error);
-            });
+          .getSuggestions({ keyword: keyword, location: map.getCenter() })
+          .then((result) => {
+            // 以当前所输入关键字获取输入提示
+            this.suggestionList = result.data;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       }
     },
     // 高亮选择的地址点
     setSuggestion(index) {
-      const {TMap} = window;
-      const {map, suggestionList, infoWindowList} = this;
+      const { TMap } = window;
+      const { map, suggestionList, infoWindowList } = this;
       var markers = new window.TMap.MultiMarker({
         map: this.map,
         geometries: [],
@@ -482,7 +411,7 @@ export default {
         map: map,
         position: suggestionList[index].location,
         content: `<h3>${suggestionList[index].title}</h3><p>地址：${suggestionList[index].address}</p>`,
-        offset: {x: 0, y: -50},
+        offset: { x: 0, y: -50 },
       });
       infoWindowList.push(infoWindow);
       map.setCenter(suggestionList[index].location);
@@ -494,7 +423,7 @@ export default {
     deleteSomeInfo() {
       // 腾讯地图去除logo
       var logo = document.querySelector(
-          "#QQMap > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(2)"
+        "#QQMap > div > div:nth-child(2) > div:nth-child(1) > div:nth-child(2)"
       );
       logo.setAttribute("style", "display: none;");
       // 腾讯地图去除logo文字
